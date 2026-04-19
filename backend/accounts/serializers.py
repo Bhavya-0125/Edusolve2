@@ -68,7 +68,7 @@ class StudentRegistrationSerializer(serializers.ModelSerializer):
             last_name=validated_data.get('last_name', ''),
             grade=validated_data['grade'],
             phone_number=validated_data.get('phone_number', ''),
-            is_active=False # The account cannot log in yet!
+            is_active=True
         )
         
         if hasattr(user, 'points'):
