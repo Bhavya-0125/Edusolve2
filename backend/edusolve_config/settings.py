@@ -7,20 +7,16 @@ from decouple import config
 import os
 import dj_database_url  # Added for cloud database routing
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # ============================================
 # Core Security Settings (Cloud Configured)
 # ============================================
 
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-# Dynamically parse allowed hosts from Render environment variables
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='127.0.0.1,localhost,*').split(',')
 
 # Application definition
@@ -30,7 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'whitenoise.runserver_nostatic',  # Added for better local static file handling
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
 
     'rest_framework',
@@ -45,7 +41,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',   # ✅ MUST BE FIRST
+    'corsheaders.middleware.CorsMiddleware',  # MUST BE FIRST
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -62,27 +58,11 @@ AUTH_USER_MODEL = 'accounts.Student'
 # CORS Configuration for Frontend Integration
 # ============================================
 
-# Base local development URLs
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5500",
-    "http://127.0.0.1:5500",
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    "http://localhost:8080",
-    "http://127.0.0.1:8080",
-    "https://edusolve2.vercel.app",
-]
+CORS_ALLOW_ALL_ORIGINS = True
 
 CSRF_TRUSTED_ORIGINS = [
     "https://edusolve2.vercel.app",
 ]
-
-# Dynamically add the live Vercel URL from Render environment variables
-prod_cors = config('CORS_ALLOWED_ORIGINS', default='')
-if prod_cors:
-    CORS_ALLOWED_ORIGINS.extend(prod_cors.split(','))
 
 CORS_ALLOW_CREDENTIALS = True
 
@@ -117,8 +97,6 @@ WSGI_APPLICATION = 'edusolve_config.wsgi.application'
 # ============================================
 # Database Configuration (Cloud Configured)
 # ============================================
-# Automatically uses SQLite locally, but switches to PostgreSQL 
-# if a DATABASE_URL environment variable is provided by Render.
 
 DATABASES = {
     'default': config(
@@ -128,7 +106,6 @@ DATABASES = {
     )
 }
 
-# Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -136,7 +113,6 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-# Internationalization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
@@ -145,10 +121,10 @@ USE_TZ = True
 # ============================================
 # Static & Media Files (Cloud Configured)
 # ============================================
+
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Tells Whitenoise to compress and cache static files in production
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
@@ -157,6 +133,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # ============================================
 # Django REST Framework & JWT Configuration
 # ============================================
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -193,11 +170,10 @@ SIMPLE_JWT = {
 # ============================================
 # External API Configurations
 # ============================================
-# Groq AI Engine for Doubt Solving
+
 GROQ_API_KEY = config('GROQ_API_KEY', default='')
 GROQ_MODEL = 'llama-3.1-8b-instant'  
 
-# Email OTP Configuration
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 465
