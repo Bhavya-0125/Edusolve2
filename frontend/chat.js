@@ -1,6 +1,6 @@
 // chat.js
 // AI Chat functionality for EduSolve
-
+const API_BASE_URL = window.API_BASE_URL || 'https://edusolve2.onrender.com';
 let currentSessionId = null;
 
 // ============================================

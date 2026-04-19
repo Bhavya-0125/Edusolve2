@@ -1,6 +1,6 @@
 // dashboard.js
 // Dashboard functionality for EduSolve - Updated to use working endpoints
-
+const API_BASE_URL = window.API_BASE_URL || 'https://edusolve2.onrender.com';
 // ============================================
 // Load User Profile (instead of stats)
 // ============================================

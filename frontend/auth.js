@@ -1,5 +1,5 @@
 // auth.js
-
+const API_BASE_URL = window.API_BASE_URL || 'https://edusolve2.onrender.com';
 // ============================================
 // Login Function
 // ============================================

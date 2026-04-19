@@ -5,6 +5,7 @@
 
 // 2. Dynamically switch the backend URL!
 const API_BASE_URL = 'https://edusolve2.onrender.com';
+window.API_BASE_URL = API_BASE_URL;
 
 const API_ENDPOINTS = {
     // Authentication
