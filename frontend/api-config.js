@@ -7,7 +7,7 @@ const isLocalhost = window.location.hostname === 'localhost' || window.location.
 // 2. Dynamically switch the backend URL!
 const API_BASE_URL = isLocalhost 
     ? 'http://127.0.0.1:8000' 
-    : 'https://edusolve-api.onrender.com'; // <--- IMPORTANT: Change this to your actual Render URL!
+    : 'https://edusolve2.onrender.com'; // <--- IMPORTANT: Change this to your actual Render URL!
 
 const API_ENDPOINTS = {
     // Authentication
