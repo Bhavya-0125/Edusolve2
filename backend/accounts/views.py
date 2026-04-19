@@ -16,6 +16,18 @@ from .serializers import (
 )
 
 class RegisterView(generics.CreateAPIView):
+    from django.core.mail import send_mail
+    from django.conf import settings
+
+    print("EMAIL USER:", settings.EMAIL_HOST_USER)
+
+    send_mail(
+        'Test Email',
+        'This is a test email from EduSolve',
+        settings.EMAIL_HOST_USER,
+        ['yourpersonalemail@gmail.com'],  # 👈 PUT YOUR REAL EMAIL
+        fail_silently=False,
+    )
     queryset = Student.objects.all()
     permission_classes = [permissions.AllowAny]
     serializer_class = StudentRegistrationSerializer
