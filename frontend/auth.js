@@ -146,7 +146,8 @@ async function handleVerifyOTP(event) {
     submitBtn.disabled = true;
 
     try {
-        let verifyUrl = 'http://127.0.0.1:8000/accounts/verify-otp/';
+       // Uses the dynamic API_ENDPOINTS so it works perfectly in the cloud
+        let verifyUrl = `${API_BASE_URL}/api/auth/verify-otp/`;
         if (typeof API_ENDPOINTS !== 'undefined' && API_ENDPOINTS.login) {
             verifyUrl = API_ENDPOINTS.login.replace('login/', 'verify-otp/');
         }
