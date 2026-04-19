@@ -58,7 +58,7 @@ AUTH_USER_MODEL = 'accounts.Student'
 # CORS Configuration for Frontend Integration
 # ============================================
 
-CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
     "https://edusolve2.vercel.app",
